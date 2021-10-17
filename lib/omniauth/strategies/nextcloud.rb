@@ -15,14 +15,17 @@ module OmniAuth
       # initializing your consumer from the OAuth gem.
       option :client_options, {}
 
-      def client
+      def merged_client_options
         overrides = options.client_options
-        client_options = {
+        {
           site: overrides.site || "#{options.site_url}/index.php/apps/oauth2",
           authorize_url: overrides.authorize_url || "#{options.site_url}/index.php/apps/oauth2/authorize",
           token_url: overrides.token_url || "#{options.site_url}/index.php/apps/oauth2/api/v1/token"
         }
-        ::OAuth2::Client.new(options.client_id, options.client_secret, deep_symbolize(client_options))
+      end
+
+      def client
+        ::OAuth2::Client.new(options.client_id, options.client_secret, deep_symbolize(merged_client_options))
       end
 
       # You may specify that your strategy should use PKCE by setting
