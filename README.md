@@ -22,13 +22,10 @@ Or install it yourself as:
 
 ### Configuration
 
+Create a new OAuth2 token in your Nextcloud instance. You can find the option in `Settings > Administration > Security` at the bottom of the page or using the link [https://nc.example.com/index.php/settings/admin/security#oauth2](https://nc.example.com/index.php/settings/admin/security#oauth2) by substituting the hostname.
+
 ```ruby
-NEXTCLOUD_URL = 'https://nc.bbz-cfp.ch'
-config.omniauth :nextcloud, ENV['NEXTCLOUD_APP_ID'], ENV['NEXTCLOUD_APP_SECRET'], client_options: {
-    :site => "#{NEXTCLOUD_URL}/index.php/apps/oauth2",
-    :authorize_url => "#{NEXTCLOUD_URL}/index.php/apps/oauth2/authorize",
-    :token_url => "#{NEXTCLOUD_URL}/index.php/apps/oauth2/api/v1/token",
-  }
+config.omniauth :nextcloud, ENV['NEXTCLOUD_APP_ID'], ENV['NEXTCLOUD_APP_SECRET'], site_url: 'https://nc.bbz-cfp.ch'
 ```
 
 ### Rails
