@@ -1,5 +1,7 @@
-require 'rexml/document'
-require 'omniauth-oauth2'
+# frozen_string_literal: true
+
+require "rexml/document"
+require "omniauth-oauth2"
 
 module OmniAuth
   module Strategies
@@ -20,23 +22,23 @@ module OmniAuth
       # additional calls (if the user id is returned with the token
       # or as a URI parameter). This may not be possible with all
       # providers.
-      uid { raw_info['ocs']['data']['id'] }
+      uid { raw_info["ocs"]["data"]["id"] }
 
       info do
         {
-          :name => raw_info['ocs']['data']['display-name'],
-          :email => raw_info['ocs']['data']['email'],
+          name: raw_info["ocs"]["data"]["display-name"],
+          email: raw_info["ocs"]["data"]["email"]
         }
       end
 
       extra do
         {
-          'raw_info' => raw_info
+          "raw_info" => raw_info
         }
       end
 
       def raw_info
-        @raw_info ||= Hash.from_xml(access_token.get('/ocs/v2.php/cloud/user').body)
+        @raw_info ||= Hash.from_xml(access_token.get("/ocs/v2.php/cloud/user").body)
       end
     end
   end

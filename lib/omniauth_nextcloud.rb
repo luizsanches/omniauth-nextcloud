@@ -1,1 +1,3 @@
-require 'omniauth/nextcloud'
+# frozen_string_literal: true
+
+require "omniauth/nextcloud"
