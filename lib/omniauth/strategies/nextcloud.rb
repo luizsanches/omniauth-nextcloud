@@ -9,9 +9,21 @@ module OmniAuth
       # Give your strategy a name.
       option :name, :nextcloud
 
+      option :site_url, nil
+
       # This is where you pass the options you would pass when
       # initializing your consumer from the OAuth gem.
-      option :client_options
+      option :client_options, {}
+
+      def client
+        overrides = options.client_options
+        client_options = {
+          site: overrides.site || "#{options.site_url}/index.php/apps/oauth2",
+          authorize_url: overrides.authorize_url || "#{options.site_url}/index.php/apps/oauth2/authorize",
+          token_url: overrides.token_url || "#{options.site_url}/index.php/apps/oauth2/api/v1/token"
+        }
+        ::OAuth2::Client.new(options.client_id, options.client_secret, deep_symbolize(client_options))
+      end
 
       # You may specify that your strategy should use PKCE by setting
       # the pkce option to true: https://tools.ietf.org/html/rfc7636
