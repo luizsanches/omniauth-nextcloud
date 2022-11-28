@@ -53,7 +53,7 @@ module OmniAuth
       end
 
       def raw_info
-        @raw_info ||= Hash.from_xml(access_token.get("/ocs/v2.php/cloud/user").body)
+        @raw_info ||= Hash.from_xml(access_token.get("#{options.site_url}/ocs/v2.php/cloud/user").body)
       end
     end
   end
