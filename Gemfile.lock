@@ -35,7 +35,7 @@ GEM
     parallel (1.21.0)
     parser (3.0.2.0)
       ast (~> 2.4.1)
-    rack (2.2.6.4)
+    rack (2.2.8.1)
     rack-protection (3.0.4)
       rack
     rainbow (3.0.0)
